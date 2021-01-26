@@ -332,6 +332,11 @@ abstract class AbstractRegenerateRewrites
             $pathParts['dirname'] = trim($pathParts['dirname'], './');
             $pathParts['filename'] = trim($pathParts['filename'], './');
 
+            // If the last symbol was was slash - add it back
+            if (substr($originalRequestPath, -1) === '/') {
+                $pathParts['filename'] .= '/';
+            }
+
             // re-set Url Rewrite with sanitized parts
             $rewrite['request_path'] = $this->_mergePartsIntoRewriteRequest($pathParts);
 
